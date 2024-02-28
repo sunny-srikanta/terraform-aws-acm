@@ -18,9 +18,18 @@ locals {
 
 resource "aws_acm_certificate" "this" {
   count = local.create_certificate ? 1 : 0
+  domain_name = [
+  {
+    base_domain = "example.com"
+    alternate_domains = ["subdomain.example.com"] 
+  },
+  {
+    base_domain = "example1.com"
+    alternate_domains = ["subdomain.example1.com"]
+  }
 
-  domain_name               = var.domain_name
-  subject_alternative_names = var.subject_alternative_names
+  ]
+  # subject_alternative_names = var.subject_alternative_names
   validation_method         = var.validation_method
   key_algorithm             = var.key_algorithm
 

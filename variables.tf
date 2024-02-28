@@ -40,10 +40,21 @@ variable "certificate_transparency_logging_preference" {
   default     = true
 }
 
+# variable "domain_name" {
+#   description = "A domain name for which the certificate should be issued"
+#   type        = string
+#   default     = ""
+# }
+
 variable "domain_name" {
-  description = "A domain name for which the certificate should be issued"
-  type        = string
-  default     = ""
+  type = list(object({
+    base_domain = string
+    alternate_domains = list(string)
+  }))
+  default = [ {
+    base_domain = ""
+    alternate_domains = [ "" ]
+  } ]
 }
 
 variable "subject_alternative_names" {
