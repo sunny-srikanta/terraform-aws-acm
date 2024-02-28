@@ -48,7 +48,7 @@ variable "domain_name" {
 
 variable "domains" {
   type = list(object({
-    domain_name = string
+    domain_name       = string
     alternate_domains = list(string)
   }))
 }

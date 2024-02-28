@@ -17,10 +17,10 @@ locals {
 }
 
 resource "aws_acm_certificate" "this" {
-  count = local.create_certificate ? 1 : 0
+  # count    = local.create_certificate ? 1 : 0
   for_each = { for i, domain in var.domains : i => domain }
 
-  domain_name = each.value.domain_name
+  domain_name               = each.value.domain_name
   subject_alternative_names = each.value.alternate_domains
   validation_method         = var.validation_method
   key_algorithm             = var.key_algorithm
